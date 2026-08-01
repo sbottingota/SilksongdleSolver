@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <limits.h>
 #include <string.h>
+#include <stdbool.h>
+#include <math.h>
 
 enum Type {
     BOSS = 0x1,
@@ -32,6 +34,19 @@ enum Color {
     ALL_COLORS = 0x3FFF
 };
 
+enum Location {
+    ALL_LOCATIONS = 0xFFFFFF
+};
+
+enum ResultInfo {
+    GREEN_RESULT,
+    ORANGE_RESULT,
+    RED_RESULT,
+
+    HIGHER_RESULT,
+    LOWER_RESULT,
+};
+
 struct Guess {
     char name[16];
 
@@ -45,7 +60,84 @@ struct Guess {
     int kill_count;
 };
 
+struct GuessInfo {
+    uint8_t possible_types;
+    uint8_t impossible_types;
+    bool is_type_correct;
+
+    uint64_t possible_locations;
+    uint64_t impossible_locations;
+    bool is_location_correct;
+
+    uint16_t possible_colors;
+    uint16_t impossible_colors;
+    bool is_color_correct;
+
+    union {
+        struct {
+            int min_health, max_health;
+            bool has_health;
+        };
+        int health;
+    };
+    bool is_health_correct;
+
+    union {
+        struct {
+            int min_kill_count, max_kill_count;
+            bool has_kill_count;
+        };
+        int kill_count;
+    };
+    bool is_kill_count_correct;
+};
+
+struct GuessResult {
+    uint8_t type;
+    enum ResultInfo type_info;
+
+    uint64_t location;
+    enum ResultInfo location_info;
+
+    uint16_t color;
+    enum ResultInfo color_info;
+
+    int health;
+    enum ResultInfo health_info;
+
+    int kill_count;
+    enum ResultInfo kill_count_info;
+};
+
 struct Guess all_guesses[100];
+
+struct GuessInfo get_blank_guess_info(void) {
+    struct GuessInfo info;
+
+    info.possible_types = ALL_TYPES;
+    info.impossible_types = 0;
+    info.is_type_correct = false;
+
+    info.possible_locations = ALL_LOCATIONS;
+    info.impossible_locations = 0;
+    info.is_location_correct = false;
+
+    info.possible_colors = ALL_COLORS;
+    info.impossible_colors = 0;
+    info.is_color_correct = false;
+
+    info.min_health = -1;
+    info.max_health = INT_MAX;
+    info.has_health = true;
+    info.is_health_correct = false;
+
+    info.min_kill_count = -1;
+    info.max_kill_count = INT_MAX;
+    info.has_kill_count = true;
+    info.is_kill_count_correct = false;
+
+    return info;
+}
 
 void init_all_guesses(void) {
     strcpy(all_guesses[0].name, "aknid");
@@ -70,18 +162,118 @@ void init_all_guesses(void) {
     all_guesses[2].kill_count = 6;
 }
 
+void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
+    switch (result.type_info) {
+        case GREEN_RESULT:
+        info->possible_types = result.type;
+        info->impossible_types = ALL_TYPES & ~result.type;
+        info->is_type_correct = true;
+        break;
+
+        case ORANGE_RESULT:
+        info->possible_types |= result.type;
+        break;
+
+        case RED_RESULT:
+        info->impossible_types |= result.type;
+        info->possible_types &= ~result.type;
+        break;
+
+        default:
+        fprintf(stderr, "Invalid 'type' field in result.\n");
+    }
+
+    switch (result.location_info) {
+        case GREEN_RESULT:
+        info->possible_locations = result.location;
+        info->impossible_locations = ALL_LOCATIONS & ~result.location;
+        info->is_location_correct = true;
+        break;
+
+        case ORANGE_RESULT:
+        info->possible_locations |= result.location;
+        break;
+
+        case RED_RESULT:
+        info->impossible_locations |= result.location;
+        info->possible_locations &= ~result.location;
+        break;
+
+        default:
+        fprintf(stderr, "Invalid 'location' field in result.\n");
+    }
+
+    switch (result.color_info) {
+        case GREEN_RESULT:
+        info->possible_colors = result.color;
+        info->impossible_colors = ALL_LOCATIONS & ~result.color;
+        info->is_color_correct = true;
+        break;
+
+        case ORANGE_RESULT:
+        info->possible_colors |= result.color;
+        break;
+
+        case RED_RESULT:
+        info->impossible_colors |= result.color;
+        info->possible_colors &= ~result.color;
+        break;
+
+        default:
+        fprintf(stderr, "Invalid 'color' field in result.\n");
+    }
+
+    switch (result.health_info) {
+        case GREEN_RESULT:
+        info->health = result.health;
+        info->is_health_correct = true;
+        break;
+
+        case HIGHER_RESULT:
+        info->min_health = result.health + 1;
+        break;
+
+        case LOWER_RESULT:
+        info->max_health = result.health - 1;
+        break;
+
+        case RED_RESULT:
+        info->health = -1;
+        info->is_health_correct = true;
+        break;
+
+        default:
+        fprintf(stderr, "Invalid 'health' field in result.\n");
+    }
+
+    switch (result.kill_count_info) {
+        case GREEN_RESULT:
+        info->kill_count = result.kill_count;
+        info->is_kill_count_correct = true;
+        break;
+
+        case HIGHER_RESULT:
+        info->min_kill_count = result.kill_count + 1;
+        break;
+
+        case LOWER_RESULT:
+        info->max_kill_count = result.kill_count - 1;
+        break;
+
+        case RED_RESULT:
+        info->kill_count = -1;
+        info->is_kill_count_correct = true;
+        break;
+
+        default:
+        fprintf(stderr, "Invalid 'kill count' field in result.\n");
+    }
+}
+
 int main() {
     init_all_guesses();
 
-    uint8_t type = ALL_TYPES;
-    uint64_t location = -1;
-    uint16_t color = ALL_COLORS;
-
-    int min_health = -1;
-    int max_health = INT_MAX;
-
-    int min_kill_count = -1;
-    int max_kill_count = INT_MAX;
+    struct GuessInfo info = get_blank_guess_info();
 
     printf("Init complete!\n");
 }
