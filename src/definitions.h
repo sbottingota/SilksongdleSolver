@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define GUESS_NAME_LENGTH 16
+#define GUESS_NAME_LENGTH 32
 #define COMBO_ARRAY_LENGTH 8
 
 enum Type {
