@@ -1,7 +1,291 @@
-aknid,enemy,bone bottom;mosshome;shellwood,white;green,15,15
+hornet,player,all,red;white,-1,-1
+garmond and zaza,npc;boss,greymoor;sinners road;the marrow;mosshome;far fields;shellwood;blasted steps;choral chambers;high halls;songclave,green;gray,460,1
+lace,npc;boss,deep docks;the cradle,white;black,850,2
+lost lace,boss,the abyss,black,1800,1
+pinstress,npc;boss,mount fay;blasted steps,gray;blue,910,1
+second sentinel,npc;boss,cogwork core;choral chambers;high halls,gold;gray;white,800,1
 alchemist zylotol,npc,wormways,white;blue,-1,-1
-alita,enemy,coral tower,red;black,80,6
 ballow,npc,deep docks,brown;gray,-1,-1
+bell hermit,npc,bellhart,brown,-1,-1
+caretaker,npc,songclave;ruined chapel,white;black;gold,-1,-1
+chapel maid,npc,ruined chapel;ruined chapel,brown;black,-1,-1
+conductor ballador,npc,high halls,???,-1,-1
+courier pill,npc,bellhart,green,-1,-1
+courier tipp,npc,bellhart,green,-1,-1
+creige,npc,halfway home,gray;white,-1,-1
+crull and benjin,npc,sinners road,brown;gray,-1,-1
+eva,npc,weavenest atla,???,-1,-1
+fearful pilgrim,npc,bone bottom,gray;white,-1,-1
+fleamaster mooshka,npc,the marrow;greymoor;blasted steps;putrified ducts,beige;gray,-1,-1
+flick the fixer,npc,bone bottom,gray;white,-1,-1
+gilly,npc,deep docks;hunters march;far fields,green;gray,-1,-1
+green prince,npc,lost verdania;choral chambers;sinners road;cogwork core,green,-1,-1
+greyroot,npc,shellwood,gray;black,-1,-1
+grishkin,npc,the marrow;greymoor;blasted steps;putrified ducts,gray;beige,-1,-1
+huntress,npc,putrified ducts,black;white,-1,-1
+kratt,npc,the marrow;greymoor;blasted steps;putrified ducts,gray;beige,-1,-1
+loam,npc,underworks,gray;white;black,-1,-1
+loddie,npc,the marrow,red;gray;pink,-1,-1
+loyal mergwin,npc,choral chambers,gray;white,-1,-1
+lumble the lucky,npc,blasted steps,gray;white,-1,-1
+mask maker,npc,mount fay,blue;gray;black,-1,-1
+mister mushroom,npc,moss grotto;bone bottom;far fields;greymoor;the slab;mount fay;the cradle;putrified ducts,blue;gray;orange,-1,-1
+moss druid,npc,moss grotto,green;white,-1,-1
+nuu,npc,halfway home;the marrow;blasted steps;shellwood;voltnest,pink;gray,-1,-1
+old penitent,npc,the slab,black,-1,-1
+pavo,npc,bellhart,gray;white;gold,-1,-1
+pilby,npc,bone bottom;far fields,gray;white,-1,-1
+pinmaster plinney,npc,bellhart;shellwood,gray;white,-1,-1
+relic seeker scrounge,npc,bellhart,gray;black;white,-1,-1
+seamstress,npc,far fields,red;gray,-1,-1
+sherma,npc,the marrow;far fields;bellhart;blasted steps;grand gate;choral chambers;whiteward;songclave,gray;white;gold,-1,-1
+snail shamans,npc,moss grotto,black;gray,-1,-1
+sprintmaster swift,npc,far fields,blue;gray,-1,-1
+styx,npc,sinners road,gray;white,-1,-1
+varga,npc,the marrow;greymoor;blasted steps;putrified ducts,beige;gray,-1,-1
+vaultkeeper cardinius,npc,whispering vaults,brown;black;gray,-1,-1
+weary pilgrim,npc,far fields,gray;white,-1,-1
+yarnaby,npc,greymoor,gray,-1,-1
+shakra,merchant;boss;npc,the marrow;bone bottom;deep docks;hunters march;far fields;greymoor;bellhart;shellwood;wormways;blasted steps;sinners road;bilewater;sands of karak;mount fay;high halls,gold;white,600,1
+forge daughter,merchant,deep docks,brown;gray;black,-1,-1
+frey,merchant,bellhart,gray,-1,-1
+grindle,merchant,the marrow;choral chambers;the slab;blasted steps,brown;gray,-1,-1
+jubilana,merchant,choral chambers;songclave,gray;white,-1,-1
+mort,merchant,far fields,black;gray;white,-1,-1
+mottled skarr,merchant,hunters march,red;green;gray,-1,-1
+pebb,merchant,bone bottom,gray,-1,-1
+twelfth architect,merchant,underworks,brown;black,-1,-1
+vog,merchant,the marrow;greymoor;blasted steps;putrified ducts,brown;gray;beige,-1,-1
+aknid,enemy,bone bottom;mosshome;shellwood,white;green,15,15
+alita,enemy,coral tower,red;black,80,6
 barnak,enemy,putrified ducts,green;brown;gray,35,8
 beastfly,enemy,the marrow;memorium;chapel of the beast,gray;white,15,30
+bloatroach,enemy,bilewater,green;gray,80,12
+brushflit,enemy,far fields,green,1,15
+burning bug,enemy,wisp thicket,red;gray,90,8
+caranid,enemy,deep docks;the marrow;far fields;memorium,gray;white,14,25
+choir bellbearer,enemy,choral chambers,white;gray;gold,35,25
+choir clapper,enemy,high halls,brown;gray;black,280,3
+choir elder,enemy,choral chambers,gray;white,45,6
+choir flyer,enemy,choral chambers,gray;white,40,20
+choir hornhead,enemy,choral chambers,gray;white,55,15
+choir pouncer,enemy,choral chambers,gray;white,30,30
+choristor,enemy,choral chambers,gray;white;gold,55,25
+clawmaiden,enemy,choral chambers;high halls,gray;white;gold,48,10
+cloverstag,enemy,lost verdania,green,62,10
+cogwork choirbug,enemy,cogwork core,brown,35,20
+cogwork clapper,enemy,cogwork core,brown;gray,145,1
+cogwork cleanser,enemy,cogwork core,gray;brown,40,12
+cogwork crawler,enemy,cogwork core,brown,35,15
+cogwork defender,enemy,cogwork core,brown;gray,55,8
+cogwork hauler,enemy,underworks,brown;black,20,12
+cogwork spine,enemy,cogwork core,brown,21,10
+void tendrils,enemy,the abyss,black,1,1
+void mass,enemy,bone bottom;weavenest atla;bilewater;grand gate;cogwork core;hunters march;high halls;sinners road;far fields;blasted steps;underworks;whispering vaults;the marrow;deep docks;greymoor;shellwood;choral chambers,black,190,9
+cogwork underfly,enemy,underworks,brown,4,25
+cogworker,enemy,cogwork core;choral chambers,brown,28,15
+conchfly,enemy,sands of karak;coral tower,red,55,8
+coral furm,enemy,sands of karak,red;gray,45,15
+corrcrust karaka,enemy,coral tower,brown;gray,105,6
+covetous pilgrim,enemy,shellwood;bilewater;bonegrave,gray;white,130,2
+craggler,enemy,wormways,gray;white,200,1
+cragglite,enemy,wormways,gray;white,20,3
+craw,enemy,greymoor,gray;brown,20,25
+craw juror,enemy,greymoor,gray;black,50,15
+crustcrag,enemy,memorium,red,80,6
+crustcrawler,enemy,coral tower,red,25,10
+deep diver,enemy,deep docks,brown;gray,90,5
+drapefly,enemy,underworks;high halls;memorium;choral chambers,gray,25,30
+drapelord,enemy,memorium,gray,50,4
+drapemite,enemy,underworks;the slab;high halls;choral chambers;whispering vaults,gray,25,20
+dreg catcher,enemy,greymoor,brown;gray,21,20
+dreg husk,enemy,whiteward,white;gray,50,8
+dregwheel,enemy,whiteward,white;gray,50,8
+driftlin,enemy,mount fay,gray;white,4,20
+driznarga,enemy,sands of karak;blasted steps;memorium,red;gray,55,14
+driznit,enemy,sands of karak;blasted steps;memorium,red;gray,29,25
+ductsucker,enemy,putrified ducts,green;gray,100,6
+elder pilgrim,enemy,the marrow,gray;white,30,5
+envoy,enemy,choral chambers,white;gray;gold,48,20
+escalion,enemy,lost verdania,green,100,10
+fertid,enemy,far fields,black;green,15,25
+flapping fertid,enemy,far fields,black;green,15,20
+flintbeetle,enemy,the marrow,black;orange,95,3
+flintflame flyer,enemy,deep docks,brown;gray,60,10
+flintstone flyer,enemy,deep docks,gray,30,25
+fluttermite,enemy,greymoor,gray,15,25
+freshfly,enemy,the slab,gray,5,20
+furm,enemy,bellhart,black;orange,20,25
+gahlia,enemy,shellwood;memorium,white;gray,20,20
+gargant gloom,enemy,the abyss,black,200,4
+garpid,enemy,the cradle,black,-1,30
+giant drapemite,enemy,high halls;whispering vaults,gray;white,100,6
+gloomsac,enemy,the abyss,black,-1,15
+grand reed,enemy,choral chambers,gray;white;brown;gold,130,12
+grom,enemy,wormways,gray;white,30,10
+gromling,enemy,wormways,gray;white,30,25
+guardfly,enemy,the slab,gray;brown,45,10
+hardbone elder,enemy,far fields,gray;white,110,10
+hardbone hopper,enemy,far fields,gray;white,20,20
+hoker,enemy,far fields,green;gray,15,15
+huge flea,enemy,memorium,beige,200,1
+imoba,enemy,the cradle,blue;gray,50,4
+judge,enemy,blasted steps,brown;gray,75,15
+kai,enemy,coral tower,pink,5,10
+kakri,enemy,coral tower,red;white,60,10
+karak gor,enemy,coral tower,red,140,8
+karaka,enemy,coral tower,red;gray,90,10
+kilik,enemy,the marrow;hunters march;memorium,gray;white,20,25
+kindanir,enemy,lost verdania,green,55,10
+lampbearer,enemy,whispering vaults,brown;gray,50,20
+last claw,enemy,far fields,red;gray;white,130,6
+lavalarga,enemy,deep docks,gray;orange,85,8
+lavalug,enemy,deep docks,gray;orange,15,12
+leaf glider,enemy,lost verdania,green,1,12
+leaf roller,enemy,lost verdania,green,42,10
+maestro,enemy,high halls,gold;gray;white,65,6
+marrowmaw,enemy,moss grotto;weavenest atla;memorium,white;gray,50,8
+massive mossgrub,enemy,memorium,green,80,3
+mawling,enemy,moss grotto;weavenest atla;memorium,white;gray,15,30
+memoria,enemy,memorium,white;gray;gold,70,2
+minister,enemy,high halls,gold;gray;white,60,15
+miremite,enemy,bilewater,green;white,30,20
+mite,enemy,greymoor;sinners road,gray;brown,15,30
+mitemother,enemy,greymoor,gray;brown,60,10
+mnemonid,enemy,mount fay,black;white,50,10
+mnemonord,enemy,mount fay,black;white,50,3
+mortician,enemy,whiteward,gray;yellow;gold,95,10
+mossgrub,enemy,moss grotto;weavenest atla;memorium,green,10,25
+mossmir,enemy,moss grotto;weavenest atla;memorium,green;gray,12,20
+mothleaf lagnia,enemy,bilewater,white;gray,1,25
+muckmaggot,enemy,bilewater;sinners road;putrified ducts;wisp thicket,gray,-1,80
+muckroach,enemy,sinners road,gray;brown,50,20
+nuphar,enemy,lost verdania,green,1,6
+overgrown pilgrim,enemy,mosshome;bonegrave,gray;green,23,20
+pendra,enemy,lost verdania,green;white,35,10
+pendragor,enemy,lost verdania,green;white,70,10
+penitent,enemy,the slab,gray,50,8
+phacia,enemy,shellwood;memorium,gray;white,15,25
+pharlid,enemy,blasted steps;lost verdania;underworks;sands of karak,white;gray,25,20
+pharlid diver,enemy,weavenest atla;whispering vaults;the cradle;lost verdania;wisp thicket,white;gray,25,10
+pilgrim bellbearer,enemy,greymoor;blasted steps;bonegrave;shellwood,gray;white,20,10
+pilgrim groveller,enemy,mosshome;the marrow;far fields;greymoor;blasted steps;shellwood,gray;white,20,35
+pilgrim guide,enemy,greymoor;the marrow;shellwood,gray;white,24,15
+pilgrim hiker,enemy,blasted steps,gray;white,50,10
+pilgrim hornfly,enemy,far fields;shellwood,gray;white,20,15
+pilgrim hulk,enemy,far fields;shellwood;deep docks,gray;white,30,10
+pilgrim pouncer,enemy,mosshome;far fields;greymoor;blasted steps;shellwood;the marrow,gray;white,20,35
+plasmid,enemy,wormways,gray;blue,60,15
+plasmidas,enemy,wormways,gray;blue,80,6
+pokenabbin,enemy,sands of karak,red;gray,45,16
+pollenica,enemy,shellwood;memorium,gold;gray,20,10
+pond skipper,enemy,shellwood;memorium,black;gray;white,15,15
+pondcatcher,enemy,shellwood,gray;green;white,25,20
+pondcatcher reed,npc,shellwood;bellhart,gray;green;white,-1,-1
+puny penitent,enemy,the slab,gray,40,6
+reed,enemy,choral chambers,gray;white;gold,55,30
+rhinogrund,enemy,far fields;memorium,brown;gray,150,2
+roachcatcher,enemy,sinners road;greymoor,gray;black;brown,40,20
+roachfeeder,enemy,sinners road,gray;black;brown,45,20
+roachkeeper,enemy,sinners road,gray;brown,100,10
+roachserver,enemy,sinners road,brown;gray,60,10
+sandcarver,enemy,blasted steps;sands of karak,brown,1,40
+scabfly,enemy,the slab,gray,20,15
+scrollreader,enemy,whispering vaults,brown;gray,100,15
+servitor boran,enemy,mount fay,black,70,5
+servitor ignim,enemy,weavenest atla,black,1,8
+shadow charger,enemy,the abyss,black,80,6
+shadow creeper,enemy,the abyss,black,40,16
+shardillard,enemy,sinners road;far fields;deep docks;greymoor;sands of karak;the marrow,black,50,5
+shellwood gnat,enemy,shellwood;memorium,black;gray;white,25,15
+silk snipper,enemy,greymoor,gray,29,25
+skarr scout,enemy,hunters march;far fields,red;gray,30,20
+skarr stalker,enemy,hunters march;far fields,red;gray;white,75,15
+skarrlid,enemy,hunters march;far fields,red,20,25
+skarrwing,enemy,hunters march;far fields,red;gray,20,30
+skrill,enemy,the cradle,blue,17,10
+skull brute,enemy,the marrow;memorium,gray;black,30,15
+skull scuttler,enemy,the marrow;memorium,gray;black,15,35
+skullwing,enemy,the marrow,gray;black,15,15
+slubberlug,enemy,bilewater,gray,22,12
+smelt shoveller,enemy,deep docks,brown;gray,30,25
+smokerock sifter,enemy,deep docks,gray,40,10
+snitchfly,enemy,bone bottom;bilewater;the slab;far fields,brown;gray,35,4
+spear skarr,enemy,hunters march;far fields,red;gray;white,75,10
+spinebeak kai,enemy,coral tower,pink,5,10
+spit squit,enemy,putrified ducts,green,55,20
+splinter,enemy,shellwood,gray,25,12
+splinterbark,enemy,shellwood,gray,15,10
+splinterhorn,enemy,shellwood,gray,25,10
+squatcraw,enemy,greymoor,gray;brown,50,15
+squatcraw juror,enemy,greymoor,gray;black,60,8
+squirrm,enemy,blasted steps,gray,12,4
+steelspine kai,enemy,coral tower,pink,5,15
+stilkin,enemy,bilewater,green,45,15
+stilkin trapper,enemy,bilewater,green,45,12
+surgeon,enemy,whiteward,white;gray;gold,75,3
+swamp squit,enemy,bilewater,green,35,30
+tallcraw,enemy,greymoor,gray;brown,50,20
+tallcraw juror,enemy,greymoor,gray;black,60,10
+tarmite,enemy,far fields,white;orange,30,10
+thread raker,enemy,greymoor,gray;brown,50,15
+undercrank,enemy,underworks,gray;black,70,4
+underloft,enemy,underworks,gray,40,25
+underpoke,enemy,underworks,gray,40,25
+underscrub,enemy,underworks,gray,27,20
+undersweep,enemy,underworks,gray,35,10
+underworker,enemy,underworks,gray,30,15
+vaultborn,enemy,whispering vaults,brown;white;gray,40,20
+vaultkeeper,enemy,whispering vaults,brown,70,10
+verdanir,enemy,lost verdania,green,100,10
+vicious caranid,enemy,far fields;memorium;hunters march,gray;white,27,15
+wardenfly,enemy,bilewater;deep docks;the slab,brown;gray;black,70,8
+winged furm,enemy,bellhart;greymoor,gray;orange,30,12
+winged lifeseed,enemy,wormways,blue,-1,8
+winged pilgrim,enemy,the marrow;far fields;moss grotto;shellwood;wormways,gray;white,20,25
+winged pilgrim bellbearer,enemy,shellwood;wormways;blasted steps,gray;white,25,10
+wingmould,enemy,red memory,white;gray,1,10
+wisp,enemy,wisp thicket,orange,90,15
+wood wasp,enemy,shellwood,purple,15,12
+wraith,enemy,the mist,white,45,10
+yago,enemy,coral tower,gray;red;white,60,12
+yuma,enemy,coral tower,gray;white,5,16
+yumama,enemy,coral tower,gray;white,75,3
 bell beast,boss,the marrow;bellways,gray;white,150,1
+bell eater,boss,bellways,black;red;gray,800,1
+broodmother,boss,the slab,gray;brown,720,1
+clover dancers,boss,lost verdania,green,600,1
+cogwork dancers,boss,cogwork core,brown;gray,810,1
+crawfather,boss,greymoor,gray;black,1300,1
+crust king khann,boss,coral tower,red;gray;white,1650,1
+disgraced chef lugoli,boss,sinners road,gray;black;brown,600,1
+father of the flame,boss,wisp thicket,red;black,640,1
+first sinner,boss,the slab,white,1300,1
+forebrothers signis & gron,boss,deep docks,gray;brown,1240,1
+fourth chorus,boss,far fields,brown;gray;black,500,1
+grand mother silk,boss,the cradle,white,1204,1
+great conchfly,boss,blasted steps,red;gray;white,820,2
+groal the great,boss,bilewater,green;gray;black,650,1
+gurr the outcast,boss,far fields,green;red;gray,1000,1
+last judge,boss,blasted steps,brown;gray,720,1
+lost garmond,boss,blasted steps,black,900,1
+moorwing,boss,greymoor,brown;gray,600,1
+moss mother,boss,moss grotto;weavenest atla,green;gray,120,3
+nyleth,boss,grand gate,white;gray;brown,1250,1
+palestag,boss,lost verdania,green,480,1
+phantom,boss,exhaust organ,gray;black,650,1
+plasmified zango,boss,wormways,gray;blue,1000,1
+raging conchfly,boss,sands of karak,red;gray;white,820,-1
+savage beastfly,boss,far fields;hunters march,brown;gray,550,2
+shrine guardian seth,npc;boss,grand gate;greymoor;shellwood;putrified ducts,gray,1185,1
+sister splinter,boss,shellwood,brown,310,1
+skarrgard,enemy,hunters march;far fields,red;gray;white,150,2
+skarrsinger karmelita,boss,far fields,red,1500,1
+skull tyrant,boss,the marrow;bone bottom,gray;black,450,1
+summoned saviour,boss,moss grotto,black,500,1
+the unravelled,boss,whiteward,white;yellow;gray,1000,1
+tormented trobbio,boss,whispering vaults,purple;gray,950,1
+trobbio,boss,whispering vaults,red;gray,700,1
+voltvyrm,boss,voltnest,purple;pink,550,1
+watcher at the edge,boss,sands of karak,gray;white;black,900,1
+widow,boss,bellhart,white;black,360,1

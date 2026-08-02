@@ -3,7 +3,7 @@
 
 #include "definitions.h"
 
-#define BUFFER_SIZE 128
+#define BUFFER_SIZE 256
 #define N_LINE_TOKENS 6
 
 struct GuessListNode {

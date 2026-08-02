@@ -52,7 +52,7 @@ uint64_t parse_location(const char *location) {
     if (strcmp(location, "mount fay") == 0) return MOUNT_FAY;
     if (strcmp(location, "putrified ducts") == 0) return PUTRIFIED_DUCTS;
     if (strcmp(location, "red memory") == 0) return RED_MEMORY;
-    if (strcmp(location, "ruined chape") == 0) return RUINED_CHAPE;
+    if (strcmp(location, "ruined chapel") == 0) return RUINED_CHAPEL;
     if (strcmp(location, "sands of karak") == 0) return SANDS_OF_KARAK;
     if (strcmp(location, "shellwood") == 0) return SHELLWOOD;
     if (strcmp(location, "sinners road") == 0) return SINNERS_ROAD;
@@ -64,8 +64,9 @@ uint64_t parse_location(const char *location) {
     if (strcmp(location, "the slab") == 0) return THE_SLAB;
     if (strcmp(location, "underworks") == 0) return UNDERWORKS;
     if (strcmp(location, "voltnest") == 0) return VOLTNEST;
-    if (strcmp(location, "weavernest atla") == 0) return WEAVERNEST_ATLA;
+    if (strcmp(location, "weavenest atla") == 0) return WEAVENEST_ATLA;
     if (strcmp(location, "whispering vaults") == 0) return WHISPERING_VAULTS;
+    if (strcmp(location, "whiteward") == 0) return WHITEWARD;
     if (strcmp(location, "wisp thicket") == 0) return WISP_THICKET;
     if (strcmp(location, "wormways") == 0) return WORMWAYS;
 
