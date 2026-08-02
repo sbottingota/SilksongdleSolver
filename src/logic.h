@@ -2,10 +2,10 @@
 #define LOGIC_H
 
 #include "definitions.h"
+#include "parser.h"
 
-void modify_guess_info(struct GuessInfo*, struct GuessResult);
-struct GuessResult parse_guess(const char*, struct Guess);
-void add_combo(uint64_t combo, uint64_t *combo_array);
-struct GuessInfo get_blank_guess_info(void);
+void modify_guess_info(struct GuessInfo *info, struct GuessResult result);
+struct Guess calculate_best_guess(struct GuessInfo info, struct GuessListNode *search_space);
+void cull_search_space(struct GuessListNode **search_space, struct GuessInfo info);
 
 #endif

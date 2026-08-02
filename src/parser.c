@@ -136,3 +136,66 @@ void free_guess_list(struct GuessListNode *node) {
     }
 }
 
+void free_list_node(struct GuessListNode **head, struct GuessListNode *node, struct GuessListNode *prev) {
+    // reattach adjacent nodes in list
+    if (prev != NULL) {
+        prev->next = node->next;
+    } else {
+        *head = node->next;
+    }
+
+    free(node);
+}
+
+enum ResultInfo char_to_result_info(char c) {
+    switch (c) {
+        case 'g':
+            return GREEN_RESULT;
+        case 'o':
+            return ORANGE_RESULT;
+        case 'r':
+            return RED_RESULT;
+        case 'h':
+            return HIGHER_RESULT;
+        case 'l':
+            return LOWER_RESULT;
+        default:
+            fprintf(stderr, "Invalid guess result '%c'.\n", c);
+            exit(EXIT_FAILURE);
+    }
+}
+
+struct GuessResult parse_guess(char *guess_str, struct Guess guess) {
+    // trim trailing newline
+    size_t guess_str_len = strlen(guess_str);
+    if (guess_str[guess_str_len - 1] == '\n') {
+        guess_str[guess_str_len - 1] = '\0';
+    }
+
+    if (strlen(guess_str) != 5) {
+        fprintf(stderr, "Guess strings must be 5 characters long but was of length %lu.\n", strlen(guess_str));
+        fprintf(stderr, "String: '%s'\n", guess_str);
+        exit(EXIT_FAILURE);
+    }
+
+    struct GuessResult result;
+
+    result.type = guess.type;
+    result.type_info = char_to_result_info(guess_str[0]);
+
+    result.location = guess.location;
+    result.location_info = char_to_result_info(guess_str[1]);
+
+    result.color = guess.color;
+    result.color_info = char_to_result_info(guess_str[2]);
+
+    result.health = guess.health;
+    result.health_info = char_to_result_info(guess_str[3]);
+
+    result.kill_count = guess.kill_count;
+    result.kill_count_info = char_to_result_info(guess_str[4]);
+
+    return result;
+}
+
+

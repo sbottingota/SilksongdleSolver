@@ -1,12 +1,14 @@
 CC=gcc
-CFLAGS = -Wall -Wextra -Wpedantic --std=c23
+CFLAGS=-Wall -Wextra -Wpedantic --std=c23
 
+.DEFAULT_GOAL := build/main
 .PHONY: clean
 
 SRCS=$(wildcard src/*)
 
 build/main: $(SRCS)
-	$(CC) $(CFLAGS) src/*.c -o build/main
+	@if [ ! -d "build" ]; then mkdir build; fi
+	$(CC) $(CFLAGS) src/*.c -o build/main -lm 
 
 clean:
-	rm -f build/*
+	rm -r build/

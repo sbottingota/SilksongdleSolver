@@ -105,6 +105,7 @@ struct Guess {
     int kill_count;
 };
 
+// N.B. necessary_xxx_combos arrays use 0 as a null terminator
 struct GuessInfo {
     uint64_t possible_types;
     uint64_t necessary_type_combos[COMBO_ARRAY_LENGTH];
