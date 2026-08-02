@@ -7,19 +7,103 @@
 #include <errno.h>
 #include <limits.h>
 
-static inline uint64_t parse_bitfield(char *token) {
-    char *end;
-    errno = 0;
+#include "helper.h"
 
-    uintmax_t value = strtoumax(token, &end, 16);
+#define PRIMARY_SEPARATOR ","
+#define SECONDARY_SEPARATOR ";"
 
-    // god I hate c string parsing
-    if (end == token || *end != '\0' || errno == ERANGE || value > UINT64_MAX) {
-        fprintf(stderr, "Invalid bitfield '%s'.\n", token);
-        exit(EXIT_FAILURE);
+typedef uint64_t (*ParserPtr)(const char *);
+
+uint64_t parse_type(const char *type) {
+    if (strcmp(type, "boss") == 0) return BOSS;
+    if (strcmp(type, "enemy") == 0) return ENEMY;
+    if (strcmp(type, "merchant") == 0) return MERCHANT;
+    if (strcmp(type, "npc") == 0) return NPC;
+    if (strcmp(type, "player") == 0) return PLAYER;
+
+    fprintf(stderr, "Unknown type '%s'.\n", type);
+    exit(EXIT_FAILURE);
+}
+
+uint64_t parse_location(const char *location) {
+    if (strcmp(location, "all") == 0) return ALL;
+    if (strcmp(location, "bellhart") == 0) return BELLHART;
+    if (strcmp(location, "bellways") == 0) return BELLWAYS;
+    if (strcmp(location, "bilewater") == 0) return BILEWATER;
+    if (strcmp(location, "blasted steps") == 0) return BLASTED_STEPS;
+    if (strcmp(location, "bone bottom") == 0) return BONE_BOTTOM;
+    if (strcmp(location, "bonegrave") == 0) return BONEGRAVE;
+    if (strcmp(location, "chapel of the beast") == 0) return CHAPEL_OF_THE_BEAST;
+    if (strcmp(location, "choral chambers") == 0) return CHORAL_CHAMBERS;
+    if (strcmp(location, "cogwork core") == 0) return COGWORK_CORE;
+    if (strcmp(location, "coral tower") == 0) return CORAL_TOWER;
+    if (strcmp(location, "deep docks") == 0) return DEEP_DOCKS;
+    if (strcmp(location, "exhaust organ") == 0) return EXHAUST_ORGAN;
+    if (strcmp(location, "far fields") == 0) return FAR_FIELDS;
+    if (strcmp(location, "grand gate") == 0) return GRAND_GATE;
+    if (strcmp(location, "greymoor") == 0) return GREYMOOR;
+    if (strcmp(location, "halfway home") == 0) return HALFWAY_HOME;
+    if (strcmp(location, "high halls") == 0) return HIGH_HALLS;
+    if (strcmp(location, "hunters march") == 0) return HUNTERS_MARCH;
+    if (strcmp(location, "lost verdania") == 0) return LOST_VERDANIA;
+    if (strcmp(location, "memorium") == 0) return MEMORIUM;
+    if (strcmp(location, "moss grotto") == 0) return MOSS_GROTTO;
+    if (strcmp(location, "mosshome") == 0) return MOSSHOME;
+    if (strcmp(location, "mount fay") == 0) return MOUNT_FAY;
+    if (strcmp(location, "putrified ducts") == 0) return PUTRIFIED_DUCTS;
+    if (strcmp(location, "red memory") == 0) return RED_MEMORY;
+    if (strcmp(location, "ruined chape") == 0) return RUINED_CHAPE;
+    if (strcmp(location, "sands of karak") == 0) return SANDS_OF_KARAK;
+    if (strcmp(location, "shellwood") == 0) return SHELLWOOD;
+    if (strcmp(location, "sinners road") == 0) return SINNERS_ROAD;
+    if (strcmp(location, "songclave") == 0) return SONGCLAVE;
+    if (strcmp(location, "the abyss") == 0) return THE_ABYSS;
+    if (strcmp(location, "the cradle") == 0) return THE_CRADLE;
+    if (strcmp(location, "the marrow") == 0) return THE_MARROW;
+    if (strcmp(location, "the mist") == 0) return THE_MIST;
+    if (strcmp(location, "the slab") == 0) return THE_SLAB;
+    if (strcmp(location, "underworks") == 0) return UNDERWORKS;
+    if (strcmp(location, "voltnest") == 0) return VOLTNEST;
+    if (strcmp(location, "weavernest atla") == 0) return WEAVERNEST_ATLA;
+    if (strcmp(location, "whispering vaults") == 0) return WHISPERING_VAULTS;
+    if (strcmp(location, "wisp thicket") == 0) return WISP_THICKET;
+    if (strcmp(location, "wormways") == 0) return WORMWAYS;
+
+    fprintf(stderr, "Unknown location '%s'.\n", location);
+    exit(EXIT_FAILURE);
+}
+
+uint64_t parse_color(const char *color) {
+    if (strcmp(color, "???") == 0) return QUESTION_MARK;
+    if (strcmp(color, "beige") == 0) return BEIGE;
+    if (strcmp(color, "black") == 0) return BLACK;
+    if (strcmp(color, "blue") == 0) return BLUE;
+    if (strcmp(color, "brown") == 0) return BROWN;
+    if (strcmp(color, "gold") == 0) return GOLD;
+    if (strcmp(color, "gray") == 0) return GRAY;
+    if (strcmp(color, "green") == 0) return GREEN;
+    if (strcmp(color, "orange") == 0) return ORANGE;
+    if (strcmp(color, "pink") == 0) return PINK;
+    if (strcmp(color, "purple") == 0) return PURPLE;
+    if (strcmp(color, "red") == 0) return RED;
+    if (strcmp(color, "white") == 0) return WHITE;
+    if (strcmp(color, "yellow") == 0) return YELLOW;
+
+    fprintf(stderr, "Unknown color '%s'.\n", color);
+    exit(EXIT_FAILURE);
+}
+
+uint64_t parse_bitfield(char *field, ParserPtr parser) {
+    uint64_t bitfield = 0;
+
+    char *token;
+    char *rest = field;
+
+    while ((token = strtok_r(rest, SECONDARY_SEPARATOR, &rest))) {
+        bitfield |= parser(token);
     }
 
-    return value;
+    return bitfield;
 }
 
 static inline int parse_int(char *token) {
@@ -39,7 +123,8 @@ static inline int parse_int(char *token) {
 
 struct Guess parse_line(char *line) {
     struct Guess guess;
-    char *token = strtok(line, ",");
+    char *rest = line;
+    char *token = strtok_r(rest, PRIMARY_SEPARATOR, &rest);
 
     for (int i = 0; i < N_LINE_TOKENS; ++i) {
         if (token == NULL) {
@@ -63,15 +148,15 @@ struct Guess parse_line(char *line) {
             break;
 
             case 1: // type
-            guess.type = parse_bitfield(token);
+            guess.type = parse_bitfield(token, parse_type);
             break;
 
             case 2: // location
-            guess.location = parse_bitfield(token);
+            guess.location = parse_bitfield(token, parse_location);
             break;
 
             case 3: // color
-            guess.color = parse_bitfield(token);
+            guess.color = parse_bitfield(token, parse_color);
             break;
 
             case 4: // health
@@ -88,7 +173,7 @@ struct Guess parse_line(char *line) {
             exit(EXIT_FAILURE);
         }
 
-        token = strtok(NULL, ",");
+        token = strtok_r(rest, PRIMARY_SEPARATOR, &rest);
     }
 
     if (token == NULL) {

@@ -1,4 +1,7 @@
-aknid,0x2,0x10400020,0x1080,15,15
-alchemist zylotol,0x8,0x20000000000,0x1008,-1,-1
-alita,0x2,0x400,0x804,80,6
-ballow,0x8,0x800,0x50,-1,-1
+aknid,enemy,bone bottom;mosshome;shellwood,white;green,15,15
+alchemist zylotol,npc,wormways,white;blue,-1,-1
+alita,enemy,coral tower,red;black,80,6
+ballow,npc,deep docks,brown;gray,-1,-1
+barnak,enemy,putrified ducts,green;brown;gray,35,8
+beastfly,enemy,the marrow;memorium;chapel of the beast,gray;white,15,30
+bell beast,boss,the marrow;bellways,gray;white,150,1
