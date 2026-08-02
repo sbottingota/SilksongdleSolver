@@ -43,7 +43,8 @@ int main() {
     // loop until the length of guess_list is either 0 or 1
     while (guess_list != NULL && guess_list->next != NULL) {
         best_guess = calculate_best_guess(info, guess_list);
-        printf("Best guess: %s.\n", best_guess.name);
+        printf("Best guess: %s. (Expected information: %lf)\n",
+            best_guess.name, calculate_expected_entropy(best_guess, info, guess_list));
 
         fgets(guess_result_string, sizeof(guess_result_string), stdin);
 

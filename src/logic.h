@@ -8,6 +8,8 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result);
 struct Guess calculate_best_guess(struct GuessInfo info, struct GuessListNode *search_space);
 void cull_search_space(struct GuessListNode **search_space, struct GuessInfo info);
 
+double calculate_expected_entropy(struct Guess guess, struct GuessInfo info, struct GuessListNode *search_space);
+
 bool is_guess_valid(struct Guess guess, struct GuessInfo guess_info);
 
 #endif

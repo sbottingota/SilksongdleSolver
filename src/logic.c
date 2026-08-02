@@ -270,6 +270,11 @@ double calculate_result_entropy(struct GuessInfo info, struct GuessResult result
         }
     }
 
+    if (search_space_size == 0) {
+        fprintf(stderr, "Empty search space.\n");
+        exit(EXIT_FAILURE);
+    }
+
     return -log2(n_valid_states / search_space_size);
 }
 
@@ -279,9 +284,17 @@ double calculate_expected_entropy(struct Guess guess, struct GuessInfo info, str
 
     for (struct GuessListNode *node = search_space; node != NULL; node = node->next) {
         struct GuessResult guess_result = get_guess_result(guess, node->guess);
-        entropy_sum += calculate_result_entropy(info, guess_result, search_space);
+        double result_entropy = calculate_result_entropy(info, guess_result, search_space);
+        if (isnan(result_entropy) || isinf(result_entropy)) continue;
+
+        entropy_sum += result_entropy;
 
         ++search_space_size;
+    }
+
+    if (search_space_size == 0) {
+        fprintf(stderr, "Empty search space.\n");
+        exit(EXIT_FAILURE);
     }
 
     return entropy_sum / search_space_size;
