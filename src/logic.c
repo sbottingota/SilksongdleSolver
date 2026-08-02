@@ -5,6 +5,20 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+void add_combo(uint64_t combo, uint64_t *combo_array) {
+    for (int i = 0; i < COMBO_ARRAY_LENGTH; ++i) {
+        if (combo_array[i] == 0) {
+            combo_array[i] = combo;
+            return;
+
+        } else if (combo_array[i] == combo) return; // combination is already in array
+    }
+
+    fprintf(stderr, "Ran out of space in combo array when trying to add '%lu'.\n", combo);
+    exit(EXIT_FAILURE);
+}
+
 void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
     switch (result.type_info) {
         case GREEN_RESULT:
@@ -13,10 +27,17 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         break;
 
         case ORANGE_RESULT:
-        info->possible_types |= result.type;
+        if (!info->is_type_correct) {
+            add_combo(result.type, info->necessary_type_combos);
+        }
         break;
 
         case RED_RESULT:
+        if (info->is_type_correct && (info->possible_types & result.type) != 0) {
+            fprintf(stderr, "Contradictory type information.\n");
+            exit(EXIT_FAILURE);
+        }
+
         info->possible_types &= ~result.type;
         break;
 
@@ -32,10 +53,17 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         break;
 
         case ORANGE_RESULT:
-        info->possible_locations |= result.location;
+        if (!info->is_location_correct) {
+            add_combo(result.location, info->necessary_location_combos);
+        }
         break;
 
         case RED_RESULT:
+        if (info->is_location_correct && (info->possible_locations & result.location) != 0) {
+            fprintf(stderr, "Contradictory location information.\n");
+            exit(EXIT_FAILURE);
+        }
+
         info->possible_locations &= ~result.location;
         break;
 
@@ -51,10 +79,17 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         break;
 
         case ORANGE_RESULT:
-        info->possible_colors |= result.color;
+        if (!info->is_color_correct) {
+            add_combo(result.color, info->necessary_color_combos);
+        }
         break;
 
         case RED_RESULT:
+        if (info->is_color_correct && (info->possible_colors & result.color) != 0) {
+            fprintf(stderr, "Contradictory color information.\n");
+            exit(EXIT_FAILURE);
+        }
+
         info->possible_colors &= ~result.color;
         break;
 
@@ -78,8 +113,14 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         break;
 
         case RED_RESULT:
-        info->health = -1;
-        info->is_health_correct = true;
+        if (result.health == -1) {
+            // if info->min_health == -1 (i.e. health can still be n/a), and this is ruled out, set min_health to 0 to mark his
+            info->min_health = info->min_health == -1 ? 0 : info->min_health;
+        } else {
+            // otherwise (the guess has health but this has been ruled out), mark that instead
+            info->health = -1;
+            info->is_health_correct = true;
+        }
         break;
 
         default:
@@ -102,8 +143,14 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         break;
 
         case RED_RESULT:
-        info->kill_count = -1;
-        info->is_kill_count_correct = true;
+        if (result.kill_count == -1) {
+            // if info->min_kill_count == -1 (i.e. kill_count can still be n/a), and this is ruled out, set min_kill_count to 0 to mark his
+            info->min_kill_count = info->min_kill_count == -1 ? 0 : info->min_kill_count;
+        } else {
+            // otherwise (the guess has kill_count but this has been ruled out), mark that instead
+            info->kill_count = -1;
+            info->is_kill_count_correct = true;
+        }
         break;
 
         default:
@@ -112,47 +159,43 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
     }
 }
 
-void add_combo(uint64_t combo, uint64_t *combo_array) {
-    for (int i = 0; i < COMBO_ARRAY_LENGTH; ++i) {
-        if (combo_array[i] == 0) {
-            combo_array[i] = combo;
-            return;
+static inline bool check_bitfield(uint64_t guess_field, uint64_t possibility_field, bool is_field_correct) {
+    if (is_field_correct) {
+        return guess_field == possibility_field;
+    } else {
+        return (guess_field & ~possibility_field) == 0;
+    }
+}
 
-        } else if (combo_array[i] == combo) return; // combination is already in array
+static inline bool check_combo(uint64_t combo, uint64_t guess_field, bool is_field_correct) {
+    if (is_field_correct || combo == 0) {
+        return true;
+
+    } else if ((guess_field & combo) == 0 || (guess_field & combo) == combo) {
+        // at least one (but not all) of the options in the combo must be correct
+        return false;
     }
 
-    fprintf(stderr, "Ran out of space in combo array when trying to add '%lu'.\n", combo);
-    exit(EXIT_FAILURE);
+    return true;
 }
 
 bool is_guess_valid(struct Guess guess, struct GuessInfo guess_info) {
-    if (guess_info.is_type_correct) {
-        if (guess.type != guess_info.possible_types) return false;
-    } else {
-        if ((guess.type & guess_info.possible_types) == 0) return false;
-    }
+    bool is_type_valid = check_bitfield(guess.type, guess_info.possible_types, guess_info.is_type_correct);
+    bool is_location_valid = check_bitfield(guess.location, guess_info.possible_locations, guess_info.is_location_correct);
+    bool is_color_valid = check_bitfield(guess.color, guess_info.possible_colors, guess_info.is_color_correct);
 
-    if (guess_info.is_location_correct) {
-        if (guess.location != guess_info.possible_locations) return false;
-    } else {
-        if ((guess.location & guess_info.possible_locations) == 0) return false;
-    }
-
-    if (guess_info.is_color_correct) {
-        if (guess.color != guess_info.possible_colors) return false;
-    } else {
-        if ((guess.color & guess_info.possible_colors) == 0) return false;
+    if (!is_type_valid || !is_location_valid || !is_color_valid) {
+        return false;
     }
 
     for (int i = 0; i < COMBO_ARRAY_LENGTH; ++i) {
-        if (!guess_info.is_type_correct && guess_info.necessary_type_combos[i] != 0
-            && (guess.type & guess_info.necessary_type_combos[i]) == 0) return false;
+        bool is_type_combo_valid = check_combo(guess_info.necessary_type_combos[i], guess.type, guess_info.is_type_correct);
+        bool is_location_combo_valid = check_combo(guess_info.necessary_location_combos[i], guess.location, guess_info.is_location_correct);
+        bool is_color_combo_valid = check_combo(guess_info.necessary_color_combos[i], guess.color, guess_info.is_color_correct);
 
-        if (!guess_info.is_location_correct && guess_info.necessary_location_combos[i] != 0
-            && (guess.location & guess_info.necessary_location_combos[i]) == 0) return false;
-
-        if (!guess_info.is_color_correct && guess_info.necessary_color_combos[i] != 0
-            && (guess.color & guess_info.necessary_color_combos[i]) == 0) return false;
+        if (!is_type_combo_valid || !is_location_combo_valid || !is_color_combo_valid) {
+            return false;
+        }
     }
 
     if (guess_info.is_health_correct) {

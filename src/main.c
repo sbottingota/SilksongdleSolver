@@ -17,7 +17,6 @@ struct GuessInfo get_blank_guess_info(void) {
 
     info.possible_locations = ALL_LOCATIONS;
     info.is_location_correct = false;
-
     info.possible_colors = ALL_COLORS;
     info.is_color_correct = false;
 
@@ -50,6 +49,7 @@ int main() {
 
         struct GuessResult result = parse_guess(guess_result_string, best_guess);
         modify_guess_info(&info, result);
+
         cull_search_space(&guess_list, info);
     }
 

@@ -106,6 +106,7 @@ struct Guess {
 };
 
 // N.B. necessary_xxx_combos arrays use 0 as a null terminator
+// these represent a situation where at least one (but not all) of the cases must be true
 struct GuessInfo {
     uint64_t possible_types;
     uint64_t necessary_type_combos[COMBO_ARRAY_LENGTH];
