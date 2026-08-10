@@ -8,6 +8,8 @@
 #define GUESSES_FILENAME "src/guesses.csv"
 #define STDIN_BUFFER_SIZE 64
 
+// #define DEBUG_INFO // enable, either through code or through the compiler, for debug info to be printed
+
 
 struct GuessInfo get_blank_guess_info(void) {
     struct GuessInfo info = {0};
@@ -53,7 +55,9 @@ int main() {
 
         cull_search_space(&guess_list, info);
 
+        #ifdef DEBUG_INFO
         print_guess_info(&info);
+        #endif
     }
 
     if (guess_list != NULL) {

@@ -9,6 +9,15 @@ cc --std=c23 src/*.c -o [output file] -lm
 ```
 And then run that file.
 
+To make the program print debug info, compile with `make debug` and run the same way.
+
+Or again, compile it manually with:
+```
+cc --std=c23 src/*.c -o [output file] -lm -DDEBUG_INFO
+```
+
+(N.B.: the `--std=c23` is because my bitfied enums use `'` number separators, which require a modern version of C. If this is a problem, you can always manually delete the quotes from `src/definitions.h` ¯\\\_(ツ)\_/¯.)
+
 ## Usage
 For non-numerical fields (e.g. location), simply put `r` if the guess gives you a red square, `o` for an orange square, and `g` for a green square.
 For numeric fields (e.g. health), put `h` if the game indicates that the answer is higher than your guess, and `l` if it is lower.
@@ -28,15 +37,14 @@ Only put `r` if no arrow appears (either the answer has n/a in that field, or yo
 
 ----
 
-Example (from the 2nd of August 2026):
+Example (from the 10th of August 2026):
 ```
-Best guess: undersweep. (Expected information: 5.443569)
-grrhg
-Best guess: cloverstag. (Expected information: 2.349163)
-grrlg
-Best guess: mnemonid. (Expected information: 1.584963)
-grolg
-Answer: wraith.
+Best guess: pilgrim hulk. (Expected information: 4.970599)
+goolh
+Best guess: aknid. (Expected information: 3.000000)
+grrgl
+Answer: lavalug.
 ```
 
-<img width="899" height="522" alt="image" src="https://github.com/user-attachments/assets/17b6654c-6294-42cc-9e48-295043f82dd4" />
+<img width="886" height="348" alt="image" src="https://github.com/user-attachments/assets/feaab784-1ce7-4fb5-b480-b2dfff7bd139" />
+

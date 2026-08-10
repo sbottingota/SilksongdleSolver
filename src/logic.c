@@ -185,8 +185,9 @@ static inline bool check_combo(uint64_t combo, uint64_t guess_field, bool is_fie
     if (is_field_correct || combo == 0) {
         return true;
 
-    } else if ((guess_field & combo) == 0 || (guess_field & combo) == combo) {
-        // at least one (but not all) of the options in the combo must be correct
+    } else if ((guess_field & combo) == 0 || guess_field == combo) {
+        // at least one of the options in the combo must be correct
+        // however they cannot match exactly
         return false;
     }
 
