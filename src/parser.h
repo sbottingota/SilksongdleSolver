@@ -22,4 +22,6 @@ void free_list_node(struct GuessListNode **head, struct GuessListNode *node, str
 // N.B. this may trim trailing newlines from your string
 struct GuessResult parse_guess(char *guess_str, struct Guess guess);
 
+void print_guess_info(const struct GuessInfo *info);
+
 #endif

@@ -52,6 +52,8 @@ int main() {
         modify_guess_info(&info, result);
 
         cull_search_space(&guess_list, info);
+
+        print_guess_info(&info);
     }
 
     if (guess_list != NULL) {

@@ -7,6 +7,13 @@
 #define GUESS_NAME_LENGTH 32
 #define COMBO_ARRAY_LENGTH 8
 
+#define ARRAY_LENGTH(array) (sizeof (array) / sizeof (array)[0])
+
+struct NamedBitfield {
+    uint64_t value;
+    const char *name;
+};
+
 enum Type {
     BOSS = 0x1,
     ENEMY = 0x2,
@@ -15,6 +22,14 @@ enum Type {
     PLAYER = 0x10,
 
     ALL_TYPES = 0x1F
+};
+
+static const struct NamedBitfield type_names[] = {
+    {BOSS, "boss"},
+    {ENEMY, "enemy"},
+    {MERCHANT, "merchant"},
+    {NPC, "npc"},
+    {PLAYER, "player"}
 };
 
 enum Color {
@@ -34,6 +49,23 @@ enum Color {
     YELLOW = 0x2000,
     
     ALL_COLORS = 0x3FFF
+};
+
+static const struct NamedBitfield color_names[] = {
+    {QUESTION_MARK, "???"},
+    {BEIGE, "beige"},
+    {BLACK, "black"},
+    {BLUE, "blue"},
+    {BROWN, "brown"},
+    {GOLD, "gold"},
+    {GRAY, "gray"},
+    {GREEN, "green"},
+    {ORANGE, "orange"},
+    {PINK, "pink"},
+    {PURPLE, "purple"},
+    {RED, "red"},
+    {WHITE, "white"},
+    {YELLOW, "yellow"}
 };
 
 enum Location {
@@ -82,6 +114,52 @@ enum Location {
     WORMWAYS = 0x40'000'000'000,
 
     ALL_LOCATIONS = 0x7F'FFF'FFF'FFF
+};
+
+static const struct NamedBitfield location_names[] = {
+    {ALL, "all"},
+    {BELLHART, "bellhart"},
+    {BELLWAYS, "bellways"},
+    {BILEWATER, "bilewater"},
+    {BLASTED_STEPS, "blasted steps"},
+    {BONE_BOTTOM, "bone bottom"},
+    {BONEGRAVE, "bonegrave"},
+    {CHAPEL_OF_THE_BEAST, "chapel of the beast"},
+    {CHORAL_CHAMBERS, "choral chambers"},
+    {COGWORK_CORE, "cogwork core"},
+    {CORAL_TOWER, "coral tower"},
+    {DEEP_DOCKS, "deep docks"},
+    {EXHAUST_ORGAN, "exhaust organ"},
+    {FAR_FIELDS, "far fields"},
+    {GRAND_GATE, "grand gate"},
+    {GREYMOOR, "greymoor"},
+    {HALFWAY_HOME, "halfway home"},
+    {HIGH_HALLS, "high halls"},
+    {HUNTERS_MARCH, "hunters march"},
+    {LOST_VERDANIA, "lost verdania"},
+    {MEMORIUM, "memorium"},
+    {MOSS_GROTTO, "moss grotto"},
+    {MOSSHOME, "mosshome"},
+    {MOUNT_FAY, "mount fay"},
+    {PUTRIFIED_DUCTS, "putrified ducts"},
+    {RED_MEMORY, "red memory"},
+    {RUINED_CHAPEL, "ruined chapel"},
+    {SANDS_OF_KARAK, "sands of karak"},
+    {SHELLWOOD, "shellwood"},
+    {SINNERS_ROAD, "sinners road"},
+    {SONGCLAVE, "songclave"},
+    {THE_ABYSS, "the abyss"},
+    {THE_CRADLE, "the cradle"},
+    {THE_MARROW, "the marrow"},
+    {THE_MIST, "the mist"},
+    {THE_SLAB, "the slab"},
+    {UNDERWORKS, "underworks"},
+    {VOLTNEST, "voltnest"},
+    {WEAVENEST_ATLA, "weavenest atla"},
+    {WHISPERING_VAULTS, "whispering vaults"},
+    {WHITEWARD, "whiteward"},
+    {WISP_THICKET, "wisp thicket"},
+    {WORMWAYS, "wormways"}
 };
 
 enum ResultInfo {

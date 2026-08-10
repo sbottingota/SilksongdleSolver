@@ -128,6 +128,13 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         exit(EXIT_FAILURE);
     }
 
+    // if the answer is higher or lower than a certain value, then it can't be n/a
+    if (result.health_info == HIGHER_RESULT || result.health_info == LOWER_RESULT) {
+        if (info->min_health == -1) {
+            info->min_health = 0;
+        }
+    }
+
     switch (result.kill_count_info) {
         case GREEN_RESULT:
         info->kill_count = result.kill_count;
@@ -156,6 +163,13 @@ void modify_guess_info(struct GuessInfo *info, struct GuessResult result) {
         default:
         fprintf(stderr, "Invalid 'kill count' field in result.\n");
         exit(EXIT_FAILURE);
+    }
+
+    // if the answer is higher or lower than a certain value, then it can't be n/a
+    if (result.kill_count_info == HIGHER_RESULT || result.kill_count_info == LOWER_RESULT) {
+        if (info->min_kill_count == -1) {
+            info->min_kill_count = 0;
+        }
     }
 }
 
