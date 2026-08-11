@@ -15,13 +15,13 @@ struct NamedBitfield {
 };
 
 enum Type {
-    BOSS = 0x1,
-    ENEMY = 0x2,
-    MERCHANT = 0x4,
-    NPC = 0x8,
-    PLAYER = 0x10,
+    BOSS = 1UL<<0,
+    ENEMY = 1UL<<1,
+    MERCHANT = 1UL<<2,
+    NPC = 1UL<<3,
+    PLAYER = 1UL<<4,
 
-    ALL_TYPES = 0x1F
+    ALL_TYPES = (1UL<<5) - 1
 };
 
 static const struct NamedBitfield type_names[] = {
@@ -33,22 +33,22 @@ static const struct NamedBitfield type_names[] = {
 };
 
 enum Color {
-    QUESTION_MARK = 0x1,
-    BEIGE = 0x2,
-    BLACK = 0x4,
-    BLUE = 0x8,
-    BROWN = 0x10,
-    GOLD = 0x20,
-    GRAY = 0x40,
-    GREEN = 0x80,
-    ORANGE = 0x100,
-    PINK = 0x200,
-    PURPLE = 0x400,
-    RED = 0x800,
-    WHITE = 0x1000,
-    YELLOW = 0x2000,
+    QUESTION_MARK = 1UL<<0,
+    BEIGE = 1UL<<1,
+    BLACK = 1UL<<2,
+    BLUE = 1UL<<3,
+    BROWN = 1UL<<4,
+    GOLD = 1UL<<5,
+    GRAY = 1UL<<6,
+    GREEN = 1UL<<7,
+    ORANGE = 1UL<<8,
+    PINK = 1UL<<9,
+    PURPLE = 1UL<<10,
+    RED = 1UL<<11,
+    WHITE = 1UL<<12,
+    YELLOW = 1UL<<13,
     
-    ALL_COLORS = 0x3FFF
+    ALL_COLORS = (1UL<<14) - 1
 };
 
 static const struct NamedBitfield color_names[] = {
@@ -69,51 +69,51 @@ static const struct NamedBitfield color_names[] = {
 };
 
 enum Location {
-    ALL = 0x1,
-    BELLHART = 0x2,
-    BELLWAYS = 0x4,
-    BILEWATER = 0x8,
-    BLASTED_STEPS = 0x10,
-    BONE_BOTTOM = 0x20,
-    BONEGRAVE = 0x40,
-    CHAPEL_OF_THE_BEAST = 0x80,
-    CHORAL_CHAMBERS = 0x100,
-    COGWORK_CORE = 0x200,
-    CORAL_TOWER = 0x400,
-    DEEP_DOCKS = 0x800,
-    EXHAUST_ORGAN = 0x1000,
-    FAR_FIELDS = 0x2000,
-    GRAND_GATE = 0x4000,
-    GREYMOOR = 0x8000,
-    HALFWAY_HOME = 0x10'000,
-    HIGH_HALLS = 0x20'000,
-    HUNTERS_MARCH = 0x40'000,
-    LOST_VERDANIA = 0x80'000,
-    MEMORIUM = 0x100'000,
-    MOSS_GROTTO = 0x200'000,
-    MOSSHOME = 0x400'000,
-    MOUNT_FAY = 0x800'000,
-    PUTRIFIED_DUCTS = 0x1'000'000,
-    RED_MEMORY = 0x2'000'000,
-    RUINED_CHAPEL = 0x4'000'000,
-    SANDS_OF_KARAK = 0x8'000'000,
-    SHELLWOOD = 0x10'000'000,
-    SINNERS_ROAD = 0x20'000'000,
-    SONGCLAVE = 0x40'000'000,
-    THE_ABYSS = 0x80'000'000,
-    THE_CRADLE = 0x100'000'000,
-    THE_MARROW = 0x200'000'000,
-    THE_MIST = 0x400'000'000,
-    THE_SLAB = 0x800'000'000,
-    UNDERWORKS = 0x1'000'000'000,
-    VOLTNEST = 0x2'000'000'000,
-    WEAVENEST_ATLA = 0x4'000'000'000,
-    WHISPERING_VAULTS = 0x8'000'000'000,
-    WHITEWARD = 0x10'000'000'000,
-    WISP_THICKET = 0x20'000'000'000,
-    WORMWAYS = 0x40'000'000'000,
+    ALL = 1UL<<0,
+    BELLHART = 1UL<<1,
+    BELLWAYS = 1UL<<2,
+    BILEWATER = 1UL<<3,
+    BLASTED_STEPS = 1UL<<4,
+    BONE_BOTTOM = 1UL<<5,
+    BONEGRAVE = 1UL<<6,
+    CHAPEL_OF_THE_BEAST = 1UL<<7,
+    CHORAL_CHAMBERS = 1UL<<8,
+    COGWORK_CORE = 1UL<<9,
+    CORAL_TOWER = 1UL<<10,
+    DEEP_DOCKS = 1UL<<11,
+    EXHAUST_ORGAN = 1UL<<12,
+    FAR_FIELDS = 1UL<<13,
+    GRAND_GATE = 1UL<<14,
+    GREYMOOR = 1UL<<15,
+    HALFWAY_HOME = 1UL<<16,
+    HIGH_HALLS = 1UL<<17,
+    HUNTERS_MARCH = 1UL<<18,
+    LOST_VERDANIA = 1UL<<19,
+    MEMORIUM = 1UL<<20,
+    MOSS_GROTTO = 1UL<<21,
+    MOSSHOME = 1UL<<22,
+    MOUNT_FAY = 1UL<<23,
+    PUTRIFIED_DUCTS = 1UL<<24,
+    RED_MEMORY = 1UL<<25,
+    RUINED_CHAPEL = 1UL<<26,
+    SANDS_OF_KARAK = 1UL<<27,
+    SHELLWOOD = 1UL<<28,
+    SINNERS_ROAD = 1UL<<29,
+    SONGCLAVE = 1UL<<30,
+    THE_ABYSS = 1UL<<31,
+    THE_CRADLE = 1UL<<32,
+    THE_MARROW = 1UL<<33,
+    THE_MIST = 1UL<<34,
+    THE_SLAB = 1UL<<35,
+    UNDERWORKS = 1UL<<36,
+    VOLTNEST = 1UL<<37,
+    WEAVENEST_ATLA = 1UL<<38,
+    WHISPERING_VAULTS = 1UL<<39,
+    WHITEWARD = 1UL<<40,
+    WISP_THICKET = 1UL<<41,
+    WORMWAYS = 1UL<<42,
 
-    ALL_LOCATIONS = 0x7F'FFF'FFF'FFF
+    ALL_LOCATIONS = (1UL<<43) - 1
 };
 
 static const struct NamedBitfield location_names[] = {

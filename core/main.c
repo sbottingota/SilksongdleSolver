@@ -5,7 +5,9 @@
 #include "logic.h"
 #include "parser.h"
 
-#define GUESSES_FILENAME "src/guesses.csv"
+#include "gui.h"
+
+#define GUESSES_FILENAME "core/guesses.csv"
 #define STDIN_BUFFER_SIZE 64
 
 // #define DEBUG_INFO // enable, either through code or through the compiler, for debug info to be printed
@@ -36,6 +38,9 @@ struct GuessInfo get_blank_guess_info(void) {
 }
 
 int main() {
+    gui_init();
+    gui_frame();
+
     struct GuessListNode *guess_list = parse_file(GUESSES_FILENAME);
     struct GuessListNode *remaining_guesses = copy_guess_list(guess_list);
 
@@ -76,5 +81,7 @@ int main() {
 
     free_guess_list(guess_list);
     free_guess_list(remaining_guesses);
+
+    gui_shutdown();
 }
 

@@ -309,8 +309,12 @@ double calculate_expected_entropy(struct Guess guess, struct GuessInfo info, str
     }
 
     if (search_space_size == 0) {
-        fprintf(stderr, "Empty search space.\n");
+        /*
+        fprintf(stderr, "Empty search space (in calculate_expected_entropy()).\n");
         exit(EXIT_FAILURE);
+        */
+
+        return 0; // if the search space is empty, then the guess returns no information
     }
 
     return entropy_sum / search_space_size;
