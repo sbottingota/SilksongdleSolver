@@ -37,40 +37,44 @@ struct GuessInfo get_blank_guess_info(void) {
 
 int main() {
     struct GuessListNode *guess_list = parse_file(GUESSES_FILENAME);
+    struct GuessListNode *remaining_guesses = copy_guess_list(guess_list);
+
     struct GuessInfo info = get_blank_guess_info();
 
     struct Guess best_guess;
     char guess_result_string[STDIN_BUFFER_SIZE];
 
     // loop until the length of guess_list is either 0 or 1
-    while (guess_list != NULL && guess_list->next != NULL) {
-        best_guess = calculate_best_guess(info, guess_list);
+    while (remaining_guesses != NULL && remaining_guesses->next != NULL) {
+        best_guess = calculate_best_guess(info, remaining_guesses, guess_list);
+
         printf("Best guess: %s. (Expected information: %lf)\n",
-            best_guess.name, calculate_expected_entropy(best_guess, info, guess_list));
+            best_guess.name, calculate_expected_entropy(best_guess, info, remaining_guesses));
 
         fgets(guess_result_string, sizeof(guess_result_string), stdin);
 
         struct GuessResult result = parse_guess(guess_result_string, best_guess);
         modify_guess_info(&info, result);
 
-        cull_search_space(&guess_list, info);
+        cull_search_space(&remaining_guesses, info);
 
         #ifdef DEBUG_INFO
         printf("Remaining guesses: ");
-        print_guesses(guess_list);
+        print_guesses(remaining_guesses);
         printf("\n\n");
 
         print_guess_info(&info);
         #endif
     }
 
-    if (guess_list != NULL) {
-        printf("Answer: %s.\n", guess_list->guess.name);
+    if (remaining_guesses != NULL) {
+        printf("Answer: %s.\n", remaining_guesses->guess.name);
 
     } else {
         printf("No such answer found.\n");
     }
 
     free_guess_list(guess_list);
+    free_guess_list(remaining_guesses);
 }
 

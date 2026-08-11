@@ -11,10 +11,7 @@ And then run that file.
 
 To make the program print debug info, compile with `make debug` and run from `build/main_debug`.
 
-Or again, compile it manually with:
-```
-cc --std=c23 src/*.c -o [output file] -lm -DDEBUG_INFO
-```
+Or again, compile it manually, with `-DDEBUG_INFO` to enable the `DEBUG_INFO` macro.
 
 (N.B.: the `--std=c23` is because my bitfied enums use `'` number separators, which require a modern version of C. If this is a problem, you can always manually delete the quotes from `src/definitions.h` ¯\\\_(ツ)\_/¯.)
 

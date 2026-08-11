@@ -300,6 +300,7 @@ double calculate_expected_entropy(struct Guess guess, struct GuessInfo info, str
     for (struct GuessListNode *node = search_space; node != NULL; node = node->next) {
         struct GuessResult guess_result = get_guess_result(guess, node->guess);
         double result_entropy = calculate_result_entropy(info, guess_result, search_space);
+
         if (isnan(result_entropy) || isinf(result_entropy)) continue;
 
         entropy_sum += result_entropy;
@@ -315,11 +316,11 @@ double calculate_expected_entropy(struct Guess guess, struct GuessInfo info, str
     return entropy_sum / search_space_size;
 }
 
-struct Guess calculate_best_guess(struct GuessInfo info, struct GuessListNode *search_space) {
+struct Guess calculate_best_guess(struct GuessInfo info, struct GuessListNode *search_space, struct GuessListNode *all_guesses) {
     struct Guess best_guess;
     double best_expected_entropy = 0;
 
-    for (struct GuessListNode *node = search_space; node != NULL; node = node->next) {
+    for (struct GuessListNode *node = all_guesses; node != NULL; node = node->next) {
         double expected_entropy = calculate_expected_entropy(node->guess, info, search_space);
 
         if (expected_entropy > best_expected_entropy) {

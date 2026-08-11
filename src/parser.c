@@ -186,6 +186,31 @@ void free_list_node(struct GuessListNode **head, struct GuessListNode *node, str
     free(node);
 }
 
+struct GuessListNode *copy_guess_list(const struct GuessListNode *guess_list) {
+    if (guess_list == NULL) return NULL;
+
+    struct GuessListNode *new_head = NULL, *new_node = NULL, *prev_new_node = NULL;
+
+    for (const struct GuessListNode *node = guess_list; node != NULL; node = node->next) {
+        new_node = malloc(sizeof(struct GuessListNode));
+
+        if (new_head == NULL) {
+            new_head = new_node;
+        }
+
+        new_node->guess = node->guess;
+        new_node->next = NULL;
+
+        if (prev_new_node != NULL) {
+            prev_new_node->next = new_node;
+        }
+
+        prev_new_node = new_node;
+    }
+
+    return new_head;
+}
+
 static enum ResultInfo char_to_result_info(char c) {
     switch (c) {
         case 'g':

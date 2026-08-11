@@ -19,6 +19,8 @@ void free_guess_list(struct GuessListNode *head);
 // set prev to NULL if node is at the head of the list
 void free_list_node(struct GuessListNode **head, struct GuessListNode *node, struct GuessListNode *prev);
 
+struct GuessListNode *copy_guess_list(const struct GuessListNode *guess_list);
+
 // N.B. this may trim trailing newlines from your string
 struct GuessResult parse_guess(char *guess_str, struct Guess guess);
 
