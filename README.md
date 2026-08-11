@@ -1,19 +1,22 @@
 Attempted [silksongdle](https://silksongdle.com/classic) solver using information theory (inspired by [this](https://youtu.be/v68zYyaEmEA) 3b1b video).
 
+Logic written in C, and GUI written in C++ using [Dear ImGui](https://github.com/ocornut/imgui/).
+
 ## Compilation
-Compile with `make` and then run with `build/main`.
-
-Or if that doesn't work (haven't tested on other devices), just compile it manually with:
 ```
-cc --std=c23 src/*.c -o [output file] -lm
+cmake -B build
+cmake --build build
 ```
-And then run that file.
 
-To make the program print debug info, compile with `make debug` and run from `build/main_debug`.
+And then run with:
+```
+build/main
+```
 
-Or again, compile it manually, with `-DDEBUG_INFO` to enable the `DEBUG_INFO` macro.
+To make the program print debug info, instead write `cmake -B build -DDEBUG_INFO=ON` and then proceed normally.
 
-(N.B.: the `--std=c23` is because my bitfied enums use `'` number separators, which require a modern version of C. If this is a problem, you can always manually delete the quotes from `src/definitions.h` ¯\\\_(ツ)\_/¯.)
+## Dependencies
+They exist, but I can't be bothered to list them right now (TODO: do this later).
 
 ## Usage
 For non-numerical fields (e.g. location), simply put `r` if the guess gives you a red square, `o` for an orange square, and `g` for a green square.
@@ -44,4 +47,7 @@ Answer: lavalug.
 ```
 
 <img width="886" height="348" alt="image" src="https://github.com/user-attachments/assets/feaab784-1ce7-4fb5-b480-b2dfff7bd139" />
+
+## GUI
+Currently disfunctional: ignore.
 
