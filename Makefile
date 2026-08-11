@@ -10,9 +10,11 @@ build/main: $(SRCS)
 	@if [ ! -d "build" ]; then mkdir build; fi
 	$(CC) $(CFLAGS) src/*.c -o build/main -lm 
 
-debug: $(SRCS)
+debug: build/main_debug
+
+build/main_debug: $(SRCS)
 	@if [ ! -d "build" ]; then mkdir build; fi
-	$(CC) $(CFLAGS) -DDEBUG_INFO src/*.c -o build/main -lm 
+	$(CC) $(CFLAGS) -DDEBUG_INFO src/*.c -o build/main_debug -lm 
 
 clean:
 	rm -r build/

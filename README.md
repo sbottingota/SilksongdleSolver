@@ -9,7 +9,7 @@ cc --std=c23 src/*.c -o [output file] -lm
 ```
 And then run that file.
 
-To make the program print debug info, compile with `make debug` and run the same way.
+To make the program print debug info, compile with `make debug` and run from `build/main_debug`.
 
 Or again, compile it manually with:
 ```

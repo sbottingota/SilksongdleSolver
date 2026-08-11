@@ -343,3 +343,18 @@ void print_guess_info(const struct GuessInfo *info) {
     printf("\n");
 }
 
+void print_guesses(const struct GuessListNode *guess_list) {
+    printf("[");
+
+    for (const struct GuessListNode *node = guess_list; node != NULL; node = node->next) {
+        // print separator if this node isn't the first one
+        if (guess_list != node) {
+            printf(", ");
+        }
+
+        printf("%s", node->guess.name);
+    }
+
+    printf("]");
+}
+

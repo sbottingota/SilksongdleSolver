@@ -56,6 +56,10 @@ int main() {
         cull_search_space(&guess_list, info);
 
         #ifdef DEBUG_INFO
+        printf("Remaining guesses: ");
+        print_guesses(guess_list);
+        printf("\n\n");
+
         print_guess_info(&info);
         #endif
     }

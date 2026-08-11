@@ -216,13 +216,13 @@ bool is_guess_valid(struct Guess guess, struct GuessInfo guess_info) {
     if (guess_info.is_health_correct) {
         if (guess.health != guess_info.health) return false;
     } else {
-        if (!(guess_info.min_health < guess.health && guess.health < guess_info.max_health)) return false;
+        if (!(guess_info.min_health <= guess.health && guess.health <= guess_info.max_health)) return false;
     }
 
     if (guess_info.is_kill_count_correct) {
         if (guess.kill_count != guess_info.kill_count) return false;
     } else {
-        if (!(guess_info.min_kill_count < guess.kill_count && guess.kill_count < guess_info.max_kill_count)) return false;
+        if (!(guess_info.min_kill_count <= guess.kill_count && guess.kill_count <= guess_info.max_kill_count)) return false;
     }
 
     return true;

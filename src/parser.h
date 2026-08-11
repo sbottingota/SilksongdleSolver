@@ -23,5 +23,6 @@ void free_list_node(struct GuessListNode **head, struct GuessListNode *node, str
 struct GuessResult parse_guess(char *guess_str, struct Guess guess);
 
 void print_guess_info(const struct GuessInfo *info);
+void print_guesses(const struct GuessListNode *guess_list);
 
 #endif
