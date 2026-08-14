@@ -324,7 +324,7 @@ struct Guess calculate_best_guess(struct GuessInfo info, struct GuessListNode *s
     struct Guess best_guess;
     double best_expected_entropy = 0;
 
-    for (struct GuessListNode *node = all_guesses; node != NULL; node = node->next) {
+    for (struct GuessListNode *node = search_space/*all_guesses*/; node != NULL; node = node->next) {
         double expected_entropy = calculate_expected_entropy(node->guess, info, search_space);
 
         if (expected_entropy > best_expected_entropy) {

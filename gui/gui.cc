@@ -1,5 +1,7 @@
 #include "gui.h"
 
+#include "application.h"
+
 #include "imgui.h"
 #include "imgui_impl_sdl3.h"
 #include "imgui_impl_opengl3.h"
@@ -13,9 +15,12 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 static SDL_Window *window = nullptr;
 static SDL_GLContext gl_context = nullptr;
+
+static bool running = false;
 
 extern "C" void gui_init(void) {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -53,33 +58,52 @@ extern "C" void gui_init(void) {
         std::exit(EXIT_FAILURE);
     }
 
-    SDL_GL_MakeCurrent(window, gl_context);
-    SDL_GL_SetSwapInterval(1);
+    if (!SDL_GL_MakeCurrent(window, gl_context)) {
+        std::fprintf(
+            stderr,
+            "SDL_GL_MakeCurrent failed: %s\n",
+            SDL_GetError()
+        );
+        std::exit(EXIT_FAILURE);
+    }
+
+    if (!SDL_GL_SetSwapInterval(1)) {
+        std::fprintf(
+            stderr,
+            "SDL_GL_SetSwapInterval failed: %s\n",
+            SDL_GetError()
+        );
+        std::exit(EXIT_FAILURE);
+    }
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
     ImGui_ImplSDL3_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init("#version 330");
+
+    running = true;
+}
+
+extern "C" bool gui_is_running(void) {
+    return running;
 }
 
 extern "C" void gui_frame(void) {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplSDL3_NewFrame();
-    ImGui::NewFrame();
+    SDL_Event event;
 
-    ImGui::Begin("Silksongdle Solver");
+    while (SDL_PollEvent(&event)) {
+        ImGui_ImplSDL3_ProcessEvent(&event);
 
-    ImGui::Text("Hello, world!");
-
-    if (ImGui::Button("Calculate")) {
-        // do something.
+        if (event.type == SDL_EVENT_QUIT)
+            running = false;
     }
 
-    ImGui::End();
+    // imgui frame
+    draw_app_frame();
 
-    ImGui::Render();
-
+    // render imgui
+    glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     SDL_GL_SwapWindow(window);
@@ -94,5 +118,9 @@ extern "C" void gui_shutdown(void) {
     SDL_GL_DestroyContext(gl_context);
     SDL_DestroyWindow(window);
     SDL_Quit();
+
+    running = false;
+    window = nullptr;
+    gl_context = nullptr;
 }
 
