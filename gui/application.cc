@@ -4,6 +4,8 @@
 #include "imgui_impl_sdl3.h"
 #include "imgui_impl_opengl3.h"
 
+#include "log_window.h"
+
 #include <iostream>
 #include <vector>
 #include <cstring>
@@ -149,6 +151,8 @@ static void draw_guess_table() {
 }
 
 void draw_guess_gui() {
+    ImGui::Begin("Silksongdle Solver");
+
     static char guess_buffer[buffer_size] = {0};
 
     ImGui::InputText("##guess", guess_buffer, buffer_size);
@@ -183,16 +187,25 @@ void draw_guess_gui() {
             selected_field = nullptr; // just deselect current selection
         }
     }
+
+    ImGui::End();
 }
 
 void draw_app_frame() {
+    static bool a = true;
+
+    if (a) {
+        log("Hello, world!");
+        log("Logging window");
+        a = false;
+    }
+
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Silksongdle Solver");
     draw_guess_gui();
-    ImGui::End();
+    draw_log_window();
 
     ImGui::Render();
 }
